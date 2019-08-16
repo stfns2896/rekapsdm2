@@ -1,10 +1,11 @@
 <?php
     if (isset($_POST['key'])) {
+        // Don't forget use your db credential
         $conn = new mysqli('localhost', 'root', 'test', 'rekapdatapelatihan');
 
         if ($_POST['key'] == 'getRowData') {
             $rowID = $conn->real_escape_string($_POST['rowID']);
-            $sql = $conn->query("SELECT nama, nipp, lokasi, substansi, kelasJabatan, jenisKelamin FROM pegawai2016 WHERE no='$rowID'");
+            $sql = $conn->query("SELECT nama, nipp, lokasi, substansi, kelasJabatan, jenisKelamin FROM pegawai2019 WHERE no='$rowID'");
             $data = $sql->fetch_array();
             $jsonArray = array(
                 'nama' => $data['nama'],
@@ -56,7 +57,7 @@
         $rowID = $conn->real_escape_string($_POST['rowID']);
 
         if ($_POST['key'] == 'deleteRow') {
-            $conn->query("DELETE FROM pegawai2016 WHERE no='$rowID'");
+            $conn->query("DELETE FROM pegawai2019 WHERE no='$rowID'");
             exit('The Row Has Been Deleted!');
         }
 
@@ -68,13 +69,13 @@
         $jenisKelamin = $conn->real_escape_string($_POST['jenisKelamin']);
 
         if ($_POST['key'] == 'updateRow') {
-            $conn->query("UPDATE pegawai2016 SET nama='$nama', nipp='$nipp', lokasi='$lokasi', substansi='$substansi', kelasJabatan='$kelasJabatan', jenisKelamin='$jenisKelamin' WHERE no='$rowID'");
+            $conn->query("UPDATE pegawai2019 SET nama='$nama', nipp='$nipp', lokasi='$lokasi', substansi='$substansi', kelasJabatan='$kelasJabatan', jenisKelamin='$jenisKelamin' WHERE no='$rowID'");
             exit('success');
         }
 
         if ($_POST['key'] == 'addNew') {
-            $sql = $conn->query("SELECT no FROM pegawai2016 WHERE nama = '$nama'");
-            $conn->query("INSERT INTO pegawai2016 (nama, nipp, lokasi, substansi, kelasJabatan, jenisKelamin) 
+            $sql = $conn->query("SELECT no FROM pegawai2019 WHERE nama = '$nama'");
+            $conn->query("INSERT INTO pegawai2019 (nama, nipp, lokasi, substansi, kelasJabatan, jenisKelamin) 
 							VALUES ('$nama', '$nipp',  '$lokasi', '$substansi', '$kelasJabatan', '$jenisKelamin')");
             exit('Has Been Inserted!');
         }
