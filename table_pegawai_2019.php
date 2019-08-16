@@ -329,7 +329,7 @@
                           while ($data = $sql->fetch_array()) {
                               ?>
                     <tr>
-                      <td></td>
+                      <td><?php echo "pegawai_".$data["no"]; ?></td>
                       <td no="<?php echo "pegawai_".$data["no"]; ?>"><?php echo $data["nama"]; ?></td>
                       <td no="<?php echo "pegawai_".$data["no"]; ?>"><?php echo $data["nipp"]; ?></td>
                       <td no="<?php echo "pegawai_".$data["no"]; ?>"><?php echo $data["lokasi"]; ?></td>
@@ -337,9 +337,9 @@
                       <td no="<?php echo "pegawai_".$data["no"]; ?>"><?php echo $data["kelasJabatan"]; ?></td>
                       <td no="<?php echo "pegawai_".$data["no"]; ?>"><?php echo $data["jenisKelamin"]; ?></td>
                       <td>
-                        <input type="button" onclick="" value="Edit" class="btn btn-primary">
-                        <input type="button" onclick="" value="View" class="btn">
-                        <input type="button" onclick="" value="Delete" class="btn btn-danger">
+                        <input type="button" onclick="viewORedit(<?php echo $data['no']; ?>,'edit')" value="Edit" class="btn btn-primary">
+                        <input type="button" onclick="viewORedit(<?php echo $data['no']; ?>,'view')" value="View" class="btn">
+                        <input type="button" onclick="deleteRow(<?php  echo $data['no']; ?>)" value="Delete" class="btn btn-danger">
                       </td>
                     </tr>
                     <?php
@@ -548,9 +548,11 @@ function manageData(key) {
         jenisKelamin: jenisKelamin.val(),
         rowID: editRowID.val()
       }, success: function (response) {
-        if (response != "success")
+        console.log('response',response);
+        if (response != "success"){
           alert(response);
-        else {
+          location.reload();
+        }else {
           $("#pegawai_" + editRowID.val()).html(nama.val());
           nama.val('');
           nipp.val('');
