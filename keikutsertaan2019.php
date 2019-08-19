@@ -403,7 +403,7 @@
                $("#manageBtn").attr('value', 'Add New').attr('onclick', "manageData('addNew')").fadeIn();
             });
 
-            getExistingData(0, 100);
+            // getExistingData(0, 100);
         });
 
         function deleteRow(rowID) {
@@ -520,7 +520,7 @@
                        idPelatihan: idPelatihan.val(),
                        namaPelatihan: namaPelatihan.val(),
                        durasi: durasi.val(),
-                       bidang: bidang.val()
+                       bidang: bidang.val(),
                        rowID: editRowID.val()
                    }, success: function (response) {
                        if (response != "success")
